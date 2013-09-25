@@ -1,0 +1,82 @@
+Webd uses the GET/POST method to serve static content
+(text, HTML, GIF, and JPG ....files) out of ./ and to serve dynamic
+content by running CGI programs out of ./cgi-bin.
+
+webd provides following functions:
+1.provide GET/POST method to view static content and run cgi script
+2.provide HTTP and HTTPS connection
+3.provide dircetory view function
+4.provide some access control based by ip address
+5.provide easy logging function
+
+To run Webd:
+   Run "webd" on the server machine, 
+	e.g., "webd"
+	Maybe you should type "./webd" if current directory is not in your $PATH
+
+   There are several argument option:
+   -d  --daemon        -> webd run in the background  
+   -p  --port          -> assigned http port
+   -s  --sslport       -> assigned https port
+   -l  --log           -> assigned log path
+   -e  --extent        -> provide https function 
+   -h  --help          -> help  
+   -v  --version       -> some other informations  
+
+
+   So,you can also do this:
+   	webd -d -p 8888 -s 4444 -e 
+
+   If your port is less then 1024,you must have the root permission,or use the sudo command.
+
+
+   Point your browser at webd: for example,http port is 8888,and https port is 4444
+   you can view following page:
+   	http:
+	    127.0.0.1:8000       home page
+
+	    127.0.0.1:8000/dir   view dir 
+	         -> you can point the file name to view file contents
+	            or point the directory name to view the directory content
+
+	    127.0.0.1:8888/getAuth.html    
+	         -> a GET method page,login with email and password,
+		    you will see you email and password content 
+
+	    127.0.0.1:8888/postAuth.html    
+	         -> a POST  method page,login with email and password, 
+		    you will see you email and password content
+
+	https: the same function as to http,just uri has a litter changes
+	    https://127.0.0.1:4444       
+	    https://127.0.0.1:4444/dir       
+	    https://127.0.0.1:4444/getAuth.html       
+	    https://127.0.0.1:4444/postAuth.html       
+
+Files:
+	cert.pem                 ->  the https CA,use openssl to create,
+	                             so you must accept the CA to continue 
+	cgi-bin                  ->  cgi script directory
+	        getAuth.c        ->  the get method cgi script
+	        postAuth.c       ->  the post method cgi script
+		Makefile         ->  cgi/bin/*.c Makefile
+	config.ini               ->  configuration file 
+	daemon_init.c            ->  daemon process 
+	doc                      ->  the web page root directory
+	log.c                    ->  provide logging 
+	main.c                   ->  the main source file
+	Makefile                 ->  *.c Makefile
+	parse_config.c           ->  read the config.ini 
+	parse.h                  ->  the main head file
+	parse_option.c           ->  parse the argv 
+	README                   ->  it's me 
+	secure_access.c          ->  provide easy access control
+	webserver.sh             ->  a shell script,to provide start/stop/restart/status the webd
+	                             e.g. webserver.sh start/stop/restart/status
+	wrap.c                   ->  must functions wrap file  
+	wrap.h                   ->  the wrap.c's head file
+
+Bugs:
+	If openssl lib library isn't accessible in your computer,you should change the 
+	Makefile.For datail,you could see Makefile.
+
