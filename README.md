@@ -13,3 +13,5 @@ Linux下的小型Web服务器，支持GET/POST/SSL等功能.
 5. 目录显示
 6. 日志功能
 7. 错误提示页面
+
+博客地址：http://blog.csdn.net/yueguanghaidao/article/details/8450938/
