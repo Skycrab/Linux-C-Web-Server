@@ -655,7 +655,7 @@ static void get_filetype(const char *filename, char *filetype)
  * serve_dynamic - run a CGI program on behalf of the client
  */
 /* $begin get_dynamic */
-void get_dynamic(int fd, char *filename, char *cgiargs) 
+static void get_dynamic(int fd, char *filename, char *cgiargs) 
 {
     char buf[MAXLINE], *emptylist[] = { NULL },httpsbuf[MAXLINE];
     int p[2];
